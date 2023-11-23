@@ -16,6 +16,7 @@ export class CreateYourAccount2Component implements OnInit {
 
   constructor(private registerService: RegisterNewInfosUserService, private fb: FormBuilder) {
     this.account2Form = this.fb.group({
+      sexe: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       country: ['', Validators.required],
       address: ['', Validators.required],

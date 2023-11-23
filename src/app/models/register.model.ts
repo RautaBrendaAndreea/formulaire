@@ -10,6 +10,7 @@ export interface CreateYourAccount {
   
 
   export interface CreateYourAccount2 extends CreateYourAccount {
+    sexe:string;
     dateOfBirth: string;
     country: string;
     address: string;

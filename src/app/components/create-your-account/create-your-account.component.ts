@@ -44,22 +44,4 @@ export class CreateYourAccountComponent {
       this.account.password === this.account.confirmPassword
     );
   }
-
-  get areRequiredFieldsFilled(): boolean {
-    return (
-      !!this.accountForm.get('firstName')?.touched &&
-      !!this.accountForm.get('lastName')?.touched &&
-      !!this.accountForm.get('email')?.touched &&
-      !!this.accountForm.get('confirmEmail')?.touched &&
-      !!this.accountForm.get('password')?.touched &&
-      !!this.accountForm.get('confirmPassword')?.touched &&
-      !!this.accountForm.get('firstName')?.value &&
-      !!this.accountForm.get('lastName')?.value &&
-      !!this.accountForm.get('email')?.value &&
-      !!this.accountForm.get('confirmEmail')?.value &&
-      !!this.accountForm.get('password')?.value &&
-      !!this.accountForm.get('confirmPassword')?.value
-    );
-  }
-  
 }

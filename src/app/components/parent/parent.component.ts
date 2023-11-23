@@ -4,10 +4,9 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-parent',
-  template: `
-    <app-create-your-account (nextStep)="onNextStep($event)"></app-create-your-account>
-    <app-create-your-account2 [accountFromStep1]="accountDataFromStep1" (submitForm)="onFormSubmitted($event)"></app-create-your-account2>
-  `
+  templateUrl: './parent.component.html',
+  styleUrls: ['./parent.component.css']
+
 })
 export class ParentComponent {
   accountDataFromStep1: CreateYourAccount2 | undefined;
@@ -15,7 +14,7 @@ export class ParentComponent {
   constructor(private router: Router) {}
 
   onNextStep(data: CreateYourAccount) {
-    this.accountDataFromStep1 = { ...data, dateOfBirth: '', country: '', address: '', postalCode: '', phoneNumber: '' };
+    this.accountDataFromStep1 = { ...data,sexe: '', dateOfBirth: '', country: '', address: '', postalCode: '', phoneNumber: '' };
     this.router.navigate(['/create-your-account2']);
   }
 

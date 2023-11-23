@@ -1,19 +1,25 @@
-<div class="container">
-  <h2>Create Your Account</h2>
+<div class="container row">
+ 
+
+
   <form
     (ngSubmit)="onSubmit()"
     [formGroup]="accountForm"
-    [ngClass]="{ 'invalid-form': !isFormValid() }"
+    novalidate
+    class="formGroup center"
   >
+
+  <h2>Create Your Account</h2>
     <!-- Nom et Prénom -->
     <div
       class="form-group"
       [ngClass]="{
         'has-error':
-          !areRequiredFieldsFilled && accountForm.get('firstName')?.touched
+          accountForm.get('firstName')?.touched &&
+          accountForm.get('firstName')?.hasError('required')
       }"
     >
-      <label for="firstName">First Name:</label>
+      <label for="firstName ">First Name</label>
       <input
         type="text"
         class="form-control"
@@ -22,11 +28,12 @@
       />
       <div
         *ngIf="
-          !areRequiredFieldsFilled && accountForm.get('firstName')?.touched
+          accountForm.get('firstName')?.touched &&
+          accountForm.get('firstName')?.hasError('required')
         "
         class="error-message"
       >
-        First Name is required.
+      This field is required
       </div>
     </div>
 
@@ -34,10 +41,11 @@
       class="form-group"
       [ngClass]="{
         'has-error':
-          !areRequiredFieldsFilled && accountForm.get('lastName')?.touched
+          accountForm.get('lastName')?.touched &&
+          accountForm.get('lastName')?.hasError('required')
       }"
     >
-      <label for="lastName">Last Name:</label>
+      <label for="lastName">Last Name</label>
       <input
         type="text"
         class="form-control"
@@ -45,10 +53,13 @@
         formControlName="lastName"
       />
       <div
-        *ngIf="!areRequiredFieldsFilled && accountForm.get('lastName')?.touched"
+        *ngIf="
+          accountForm.get('lastName')?.touched &&
+          accountForm.get('lastName')?.hasError('required')
+        "
         class="error-message"
       >
-        Last Name is required.
+      This field is required
       </div>
     </div>
 
@@ -57,10 +68,11 @@
       class="form-group"
       [ngClass]="{
         'has-error':
-          !areRequiredFieldsFilled && accountForm.get('email')?.touched
+          accountForm.get('email')?.touched &&
+          accountForm.get('email')?.hasError('required')
       }"
     >
-      <label for="email">Email:</label>
+      <label for="email">Email</label>
       <input
         type="email"
         class="form-control"
@@ -68,10 +80,13 @@
         formControlName="email"
       />
       <div
-        *ngIf="!areRequiredFieldsFilled && accountForm.get('email')?.touched"
+        *ngIf="
+          accountForm.get('email')?.touched &&
+          accountForm.get('email')?.hasError('required')
+        "
         class="error-message"
       >
-        Email is required.
+      This field is required
       </div>
     </div>
 
@@ -79,10 +94,11 @@
       class="form-group"
       [ngClass]="{
         'has-error':
-          !areRequiredFieldsFilled && accountForm.get('confirmEmail')?.touched
+          accountForm.get('confirmEmail')?.touched &&
+          accountForm.get('confirmEmail')?.hasError('required')
       }"
     >
-      <label for="confirmEmail">Confirm Email:</label>
+      <label for="confirmEmail">Confirmation Email</label>
       <input
         type="email"
         class="form-control"
@@ -91,11 +107,12 @@
       />
       <div
         *ngIf="
-          !areRequiredFieldsFilled && accountForm.get('confirmEmail')?.touched
+          accountForm.get('confirmEmail')?.touched &&
+          accountForm.get('confirmEmail')?.hasError('required')
         "
         class="error-message"
       >
-        Confirm Email is required.
+      This field is required
       </div>
     </div>
 
@@ -104,10 +121,11 @@
       class="form-group"
       [ngClass]="{
         'has-error':
-          !areRequiredFieldsFilled && accountForm.get('password')?.touched
+          accountForm.get('password')?.touched &&
+          accountForm.get('password')?.hasError('required')
       }"
     >
-      <label for="password">Password:</label>
+      <label for="password">Password</label>
       <input
         type="password"
         class="form-control"
@@ -115,10 +133,13 @@
         formControlName="password"
       />
       <div
-        *ngIf="!areRequiredFieldsFilled && accountForm.get('password')?.touched"
+        *ngIf="
+          accountForm.get('password')?.touched &&
+          accountForm.get('password')?.hasError('required')
+        "
         class="error-message"
       >
-        Password is required.
+      This field is required
       </div>
     </div>
 
@@ -126,11 +147,11 @@
       class="form-group"
       [ngClass]="{
         'has-error':
-          !areRequiredFieldsFilled &&
-          accountForm.get('confirmPassword')?.touched
+          accountForm.get('confirmPassword')?.touched &&
+          accountForm.get('confirmPassword')?.hasError('required')
       }"
     >
-      <label for="confirmPassword">Confirm Password:</label>
+      <label for="confirmPassword">Confirmation Password</label>
       <input
         type="password"
         class="form-control"
@@ -139,17 +160,17 @@
       />
       <div
         *ngIf="
-          !areRequiredFieldsFilled &&
-          accountForm.get('confirmPassword')?.touched
+          accountForm.get('confirmPassword')?.touched &&
+          accountForm.get('confirmPassword')?.hasError('required')
         "
         class="error-message"
       >
-        Confirm Password is required.
+      This field is required
       </div>
     </div>
 
     <!-- Bouton Next -->
-    <button type="submit" class="btn btn-primary" [disabled]="!isFormValid()">
+    <button type="submit" class="btn btn-primary mt-2" [disabled]="!isFormValid()">
       Next
     </button>
   </form>
