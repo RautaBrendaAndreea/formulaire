@@ -1,20 +1,22 @@
-// parent.component.ts
 import { Component } from '@angular/core';
 import { CreateYourAccount, CreateYourAccount2 } from '../../models/register.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-parent',
   template: `
     <app-create-your-account (nextStep)="onNextStep($event)"></app-create-your-account>
     <app-create-your-account2 [accountFromStep1]="accountDataFromStep1" (submitForm)="onFormSubmitted($event)"></app-create-your-account2>
-    <!-- Ajoutez d'autres composants ou du contenu ici -->
   `
 })
 export class ParentComponent {
   accountDataFromStep1: CreateYourAccount2 | undefined;
 
+  constructor(private router: Router) {}
+
   onNextStep(data: CreateYourAccount) {
     this.accountDataFromStep1 = { ...data, dateOfBirth: '', country: '', address: '', postalCode: '', phoneNumber: '' };
+    this.router.navigate(['/create-your-account2']);
   }
 
   onFormSubmitted(data: CreateYourAccount2) {

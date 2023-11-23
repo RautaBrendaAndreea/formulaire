@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* Ajoutez ces styles pour personnaliser l'apparence des erreurs */
+.error-message {
+    color: #bb2624;  /* Couleur du texte de l'erreur */
+    margin-top: 5px;  /* Marge supérieure */
+  }
+  
+  .has-error input {
+    border-color: #bb2624;  /* Couleur de la bordure du champ en erreur */
+  }
+
+  

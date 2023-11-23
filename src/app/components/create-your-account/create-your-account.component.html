@@ -1,78 +1,156 @@
 <div class="container">
   <h2>Create Your Account</h2>
-  <form #accountForm="ngForm" (ngSubmit)="onSubmit()">
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="accountForm"
+    [ngClass]="{ 'invalid-form': !isFormValid() }"
+  >
     <!-- Nom et Prénom -->
-    <div class="form-group">
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          !areRequiredFieldsFilled && accountForm.get('firstName')?.touched
+      }"
+    >
       <label for="firstName">First Name:</label>
       <input
         type="text"
         class="form-control"
         id="firstName"
-        name="firstName"
-        required
-        [(ngModel)]="account.firstName"
+        formControlName="firstName"
       />
+      <div
+        *ngIf="
+          !areRequiredFieldsFilled && accountForm.get('firstName')?.touched
+        "
+        class="error-message"
+      >
+        First Name is required.
+      </div>
     </div>
-    <div class="form-group">
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          !areRequiredFieldsFilled && accountForm.get('lastName')?.touched
+      }"
+    >
       <label for="lastName">Last Name:</label>
       <input
         type="text"
         class="form-control"
         id="lastName"
-        name="lastName"
-        required
-        [(ngModel)]="account.lastName"
+        formControlName="lastName"
       />
+      <div
+        *ngIf="!areRequiredFieldsFilled && accountForm.get('lastName')?.touched"
+        class="error-message"
+      >
+        Last Name is required.
+      </div>
     </div>
 
     <!-- Email et Confirmation Email -->
-    <div class="form-group">
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          !areRequiredFieldsFilled && accountForm.get('email')?.touched
+      }"
+    >
       <label for="email">Email:</label>
       <input
         type="email"
         class="form-control"
         id="email"
-        name="email"
-        required
-        [(ngModel)]="account.email"
+        formControlName="email"
       />
+      <div
+        *ngIf="!areRequiredFieldsFilled && accountForm.get('email')?.touched"
+        class="error-message"
+      >
+        Email is required.
+      </div>
     </div>
-    <div class="form-group">
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          !areRequiredFieldsFilled && accountForm.get('confirmEmail')?.touched
+      }"
+    >
       <label for="confirmEmail">Confirm Email:</label>
       <input
         type="email"
         class="form-control"
         id="confirmEmail"
-        name="confirmEmail"
-        required
-        [(ngModel)]="account.confirmEmail"
+        formControlName="confirmEmail"
       />
+      <div
+        *ngIf="
+          !areRequiredFieldsFilled && accountForm.get('confirmEmail')?.touched
+        "
+        class="error-message"
+      >
+        Confirm Email is required.
+      </div>
     </div>
 
     <!-- Mot de passe et Confirmation Mot de passe -->
-    <div class="form-group">
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          !areRequiredFieldsFilled && accountForm.get('password')?.touched
+      }"
+    >
       <label for="password">Password:</label>
       <input
         type="password"
         class="form-control"
         id="password"
-        name="password"
-        required
-        [(ngModel)]="account.password"
+        formControlName="password"
       />
+      <div
+        *ngIf="!areRequiredFieldsFilled && accountForm.get('password')?.touched"
+        class="error-message"
+      >
+        Password is required.
+      </div>
     </div>
-    <div class="form-group">
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          !areRequiredFieldsFilled &&
+          accountForm.get('confirmPassword')?.touched
+      }"
+    >
       <label for="confirmPassword">Confirm Password:</label>
       <input
         type="password"
         class="form-control"
         id="confirmPassword"
-        name="confirmPassword"
-        required
-        [(ngModel)]="account.confirmPassword"
+        formControlName="confirmPassword"
       />
+      <div
+        *ngIf="
+          !areRequiredFieldsFilled &&
+          accountForm.get('confirmPassword')?.touched
+        "
+        class="error-message"
+      >
+        Confirm Password is required.
+      </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Next</button>
+    <!-- Bouton Next -->
+    <button type="submit" class="btn btn-primary" [disabled]="!isFormValid()">
+      Next
+    </button>
   </form>
 </div>
