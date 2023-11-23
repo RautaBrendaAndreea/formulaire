@@ -1,1 +1,103 @@
-<p>create-your-account2 works!</p>
+<div class="container row">
+
+  <form [formGroup]="account2Form" (ngSubmit)="onSubmit()" class="formGroup center">
+
+
+    <h2>Create Your Account (Step 2)</h2>
+    <!-- Sexe -->
+    <div class="form-group content ">
+      <label for="sexe">Gender</label>
+      <select
+        class="form-control"
+        id="sexe"
+        name="sexe"
+        formControlName="sexe"
+        >
+        <option value="homme">Man</option>
+        <option value="femme">Woman</option>
+      </select>
+      <div *ngIf="!isFieldValid('sexe') && account2Form.get('sexe')?.touched" class="error-message">
+        This field is required
+      </div>
+    </div>
+
+    <!-- Date de naissance -->
+
+    <div class="form-group">
+      <label for="date">Date of Birth</label>
+      <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth">
+      <div *ngIf="!isFieldValid('dateOfBirth') && account2Form.get('dateOfBirth')?.touched" class="error-message">
+        This field is required
+      </div>
+    </div>
+
+
+    <!-- Pays -->
+    <div class="form-group">
+      <label for="country">Country</label>
+      <select
+        class="form-control"
+        id="country"
+        name="country"
+        formControlName="country"
+      >
+        <option *ngFor="let country of countries" [value]="country.alpha2">
+          {{ country.nom_fr_fr | uppercase }}
+        </option>
+      </select>
+      <div *ngIf="!isFieldValid('country') && account2Form.get('country')?.touched" class="error-message">
+        This field is required
+      </div>
+    </div>
+
+
+<!-- Adresse et Code postal -->
+<div class="form-group">
+  <label for="address">Address</label>
+  <input
+    type="text"
+    class="form-control"
+    id="address"
+    name="address"
+    formControlName="address"
+  />
+  <div *ngIf="!isFieldValid('address') && account2Form.get('address')?.touched" class="error-message">
+    This field is required
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="postalCode">Postal Code</label>
+  <input
+    type="text"
+    class="form-control"
+    id="postalCode"
+    name="postalCode"
+    formControlName="postalCode"
+  />
+  <div *ngIf="!isFieldValid('postalCode') && account2Form.get('postalCode')?.touched" class="error-message">
+    This field is required
+  </div>
+</div>
+
+
+<!-- Numéro de téléphone -->
+<div class="form-group">
+  <label for="phoneNumber">Phone Number</label>
+  <input
+    type="tel"
+    class="form-control"
+    id="phoneNumber"
+    name="phoneNumber"
+    formControlName="phoneNumber"
+    placeholder="06 55 23 87 11"
+  />
+  <div *ngIf="!isFieldValid('phoneNumber') && account2Form.get('phoneNumber')?.touched" class="error-message">
+    This field is required
+  </div>
+</div>
+
+
+    <button type="submit" class="btn btn-primary  mt-2">Submit</button>
+  </form>
+</div>

@@ -1,1 +1,177 @@
-<p>create-your-account works!</p>
+<div class="container row">
+ 
+
+
+  <form
+    (ngSubmit)="onSubmit()"
+    [formGroup]="accountForm"
+    novalidate
+    class="formGroup center"
+  >
+
+  <h2>Create Your Account</h2>
+    <!-- Nom et Prénom -->
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          accountForm.get('firstName')?.touched &&
+          accountForm.get('firstName')?.hasError('required')
+      }"
+    >
+      <label for="firstName ">First Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        formControlName="firstName"
+      />
+      <div
+        *ngIf="
+          accountForm.get('firstName')?.touched &&
+          accountForm.get('firstName')?.hasError('required')
+        "
+        class="error-message"
+      >
+      This field is required
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          accountForm.get('lastName')?.touched &&
+          accountForm.get('lastName')?.hasError('required')
+      }"
+    >
+      <label for="lastName">Last Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        formControlName="lastName"
+      />
+      <div
+        *ngIf="
+          accountForm.get('lastName')?.touched &&
+          accountForm.get('lastName')?.hasError('required')
+        "
+        class="error-message"
+      >
+      This field is required
+      </div>
+    </div>
+
+    <!-- Email et Confirmation Email -->
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          accountForm.get('email')?.touched &&
+          accountForm.get('email')?.hasError('required')
+      }"
+    >
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+      <div
+        *ngIf="
+          accountForm.get('email')?.touched &&
+          accountForm.get('email')?.hasError('required')
+        "
+        class="error-message"
+      >
+      This field is required
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          accountForm.get('confirmEmail')?.touched &&
+          accountForm.get('confirmEmail')?.hasError('required')
+      }"
+    >
+      <label for="confirmEmail">Confirmation Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="confirmEmail"
+        formControlName="confirmEmail"
+      />
+      <div
+        *ngIf="
+          accountForm.get('confirmEmail')?.touched &&
+          accountForm.get('confirmEmail')?.hasError('required')
+        "
+        class="error-message"
+      >
+      This field is required
+      </div>
+    </div>
+
+    <!-- Mot de passe et Confirmation Mot de passe -->
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          accountForm.get('password')?.touched &&
+          accountForm.get('password')?.hasError('required')
+      }"
+    >
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+      />
+      <div
+        *ngIf="
+          accountForm.get('password')?.touched &&
+          accountForm.get('password')?.hasError('required')
+        "
+        class="error-message"
+      >
+      This field is required
+      </div>
+    </div>
+
+    <div
+      class="form-group"
+      [ngClass]="{
+        'has-error':
+          accountForm.get('confirmPassword')?.touched &&
+          accountForm.get('confirmPassword')?.hasError('required')
+      }"
+    >
+      <label for="confirmPassword">Confirmation Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+      />
+      <div
+        *ngIf="
+          accountForm.get('confirmPassword')?.touched &&
+          accountForm.get('confirmPassword')?.hasError('required')
+        "
+        class="error-message"
+      >
+      This field is required
+      </div>
+    </div>
+
+    <!-- Bouton Next -->
+    <button type="submit" class="btn btn-primary mt-2" [disabled]="!isFormValid()">
+      Next
+    </button>
+  </form>
+</div>
