@@ -1,1 +1,72 @@
-<p>create-your-account2 works!</p>
+<div class="container">
+  <h2>Create Your Account (Step 2)</h2>
+  <form #accountForm2="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Date de naissance -->
+    <div class="form-group">
+      <label for="dob">Date of Birth</label>
+      <input
+        type="date"
+        class="form-control"
+        id="dob"
+        name="dob"
+        required
+        [(ngModel)]="account2.dateOfBirth"
+      />
+    </div>
+
+    <!-- Pays -->
+    <div class="form-group">
+      <label for="country">Country</label>
+      <select
+        class="form-control"
+        id="country"
+        name="country"
+        required
+        [(ngModel)]="account2.country"
+      >
+        <option *ngFor="let country of countries" [value]="country.alpha2">
+          {{ country.nom_fr_fr }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Adresse et Code postal -->
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        name="address"
+        required
+        [(ngModel)]="account2.address"
+      />
+    </div>
+    <div class="form-group">
+      <label for="postalCode">Postal Code</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postalCode"
+        name="postalCode"
+        required
+        [(ngModel)]="account2.postalCode"
+      />
+    </div>
+
+    <!-- Numéro de téléphone -->
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number:</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="phoneNumber"
+        name="phoneNumber"
+        required
+        [(ngModel)]="account2.phoneNumber"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

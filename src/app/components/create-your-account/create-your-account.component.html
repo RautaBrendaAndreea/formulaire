@@ -1,1 +1,78 @@
-<p>create-your-account works!</p>
+<div class="container">
+  <h2>Create Your Account</h2>
+  <form #accountForm="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Nom et Prénom -->
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="firstName"
+        name="firstName"
+        required
+        [(ngModel)]="account.firstName"
+      />
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lastName"
+        name="lastName"
+        required
+        [(ngModel)]="account.lastName"
+      />
+    </div>
+
+    <!-- Email et Confirmation Email -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        [(ngModel)]="account.email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="confirmEmail">Confirm Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        id="confirmEmail"
+        name="confirmEmail"
+        required
+        [(ngModel)]="account.confirmEmail"
+      />
+    </div>
+
+    <!-- Mot de passe et Confirmation Mot de passe -->
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        required
+        [(ngModel)]="account.password"
+      />
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirmPassword"
+        name="confirmPassword"
+        required
+        [(ngModel)]="account.confirmPassword"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Next</button>
+  </form>
+</div>
