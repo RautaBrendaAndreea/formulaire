@@ -3,10 +3,12 @@
   <form [formGroup]="account2Form" (ngSubmit)="onSubmit()" class="formGroup center">
 
 
-    <h2>Create Your Account (Step 2)</h2>
+    <h2>{{ 'Create Your Account (Step 2)' | uppercase }}</h2>
+
+
     <!-- Sexe -->
     <div class="form-group content ">
-      <label for="sexe">Gender</label>
+      <label for="sexe">Gender<span class="mandatoryLabel">*</span></label>
       <select
         class="form-control"
         id="sexe"
@@ -22,9 +24,8 @@
     </div>
 
     <!-- Date de naissance -->
-
     <div class="form-group">
-      <label for="date">Date of Birth</label>
+      <label for="date">Date of Birth<span class="mandatoryLabel">*</span></label>
       <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth">
       <div *ngIf="!isFieldValid('dateOfBirth') && account2Form.get('dateOfBirth')?.touched" class="error-message">
         This field is required
@@ -34,7 +35,7 @@
 
     <!-- Pays -->
     <div class="form-group">
-      <label for="country">Country</label>
+      <label for="country">Country<span class="mandatoryLabel">*</span></label>
       <select
         class="form-control"
         id="country"
@@ -53,7 +54,7 @@
 
 <!-- Adresse et Code postal -->
 <div class="form-group">
-  <label for="address">Address</label>
+  <label for="address">Address<span class="mandatoryLabel">*</span></label>
   <input
     type="text"
     class="form-control"
@@ -67,7 +68,7 @@
 </div>
 
 <div class="form-group">
-  <label for="postalCode">Postal Code</label>
+  <label for="postalCode">Postal Code<span class="mandatoryLabel">*</span></label>
   <input
     type="text"
     class="form-control"
@@ -83,7 +84,7 @@
 
 <!-- Numéro de téléphone -->
 <div class="form-group">
-  <label for="phoneNumber">Phone Number</label>
+  <label for="phoneNumber">Phone Number<span class="mandatoryLabel">*</span></label>
   <input
     type="tel"
     class="form-control"

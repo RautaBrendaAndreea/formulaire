@@ -1,6 +1,30 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { CreateYourAccount } from '../../models/register.model';
+
+
+
+export function emailMatcher(control: AbstractControl) {
+  const email = control.get('email')?.value;
+  const confirmationEmail = control.get('confirmationEmail')?.value;
+
+  if (email === confirmationEmail) {
+    return null;
+  }
+
+  return { emailMismatch: true };
+}
+
+export function passwordMatcher(control: AbstractControl) {
+  const password = control.get('password')?.value;
+  const confirmationPassword = control.get('confirmationPassword')?.value;
+
+  if (password === confirmationPassword) {
+    return null;
+  }
+
+  return { passwordMismatch: true };
+}
 
 @Component({
   selector: 'app-create-your-account',
@@ -9,7 +33,7 @@ import { CreateYourAccount } from '../../models/register.model';
 })
 export class CreateYourAccountComponent {
   accountForm: FormGroup;
-
+  showPassword: boolean = false;
   @Output() nextStep: EventEmitter<CreateYourAccount> = new EventEmitter<CreateYourAccount>();
   account: CreateYourAccount = {
     firstName: '',
@@ -43,5 +67,9 @@ export class CreateYourAccountComponent {
       this.account.email === this.account.confirmEmail &&
       this.account.password === this.account.confirmPassword
     );
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 }

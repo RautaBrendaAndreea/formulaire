@@ -6,10 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./contact-page.component.css']
 })
 export class ContactPageComponent {
+
   contact = {
+    name: '',
     email: '',
-    subject: '',
-    description: ''
+    message: ''
   };
 
   onSubmit() {

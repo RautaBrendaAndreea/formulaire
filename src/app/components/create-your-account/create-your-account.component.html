@@ -1,3 +1,4 @@
+
 <div class="container row">
  
 
@@ -9,7 +10,8 @@
     class="formGroup center"
   >
 
-  <h2>Create Your Account</h2>
+  <h2>{{ 'Create Your Account' | uppercase }}</h2>
+
     <!-- Nom et Prénom -->
     <div
       class="form-group"
@@ -19,7 +21,7 @@
           accountForm.get('firstName')?.hasError('required')
       }"
     >
-      <label for="firstName ">First Name</label>
+      <label for="firstName ">First Name <span class="mandatoryLabel">*</span></label>
       <input
         type="text"
         class="form-control"
@@ -45,7 +47,7 @@
           accountForm.get('lastName')?.hasError('required')
       }"
     >
-      <label for="lastName">Last Name</label>
+      <label for="lastName">Last Name<span class="mandatoryLabel">*</span></label>
       <input
         type="text"
         class="form-control"
@@ -72,7 +74,7 @@
           accountForm.get('email')?.hasError('required')
       }"
     >
-      <label for="email">Email</label>
+      <label for="email">Email<span class="mandatoryLabel">*</span></label>
       <input
         type="email"
         class="form-control"
@@ -98,7 +100,7 @@
           accountForm.get('confirmEmail')?.hasError('required')
       }"
     >
-      <label for="confirmEmail">Confirmation Email</label>
+      <label for="confirmEmail">Confirmation Email<span class="mandatoryLabel">*</span></label>
       <input
         type="email"
         class="form-control"
@@ -125,13 +127,24 @@
           accountForm.get('password')?.hasError('required')
       }"
     >
-      <label for="password">Password</label>
+      <label for="password">Password<span class="mandatoryLabel">*</span></label>
       <input
-        type="password"
+        type="{{ showPassword ? 'text' : 'password' }}"
         class="form-control"
         id="password"
         formControlName="password"
       />
+      <div class="input-group-append">
+        <div class="input-group-text">
+          <input
+            type="checkbox"
+            class="showPasswordCheckbox"
+            id="showPasswordCheckbox"
+            (change)="toggleShowPassword()"
+          />
+          <label for="showPasswordCheckbox">Show Password</label>
+        </div>
+      </div>
       <div
         *ngIf="
           accountForm.get('password')?.touched &&
@@ -151,7 +164,9 @@
           accountForm.get('confirmPassword')?.hasError('required')
       }"
     >
-      <label for="confirmPassword">Confirmation Password</label>
+
+
+      <label for="confirmPassword">Confirmation Password<span class="mandatoryLabel">*</span></label>
       <input
         type="password"
         class="form-control"
