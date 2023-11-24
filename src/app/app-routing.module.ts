@@ -8,6 +8,7 @@ import { ParentComponent } from './components/parent/parent.component';
 const routes: Routes = [
   { path: 'create-your-account', component: ParentComponent },
   { path: 'create-your-account2', component: CreateYourAccount2Component },
+  { path: 'contact-page', component: ContactPageComponent }
 ];
 
 

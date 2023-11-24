@@ -1,7 +1,7 @@
 body {
   font-family: 'Comfortaa', sans-serif;
   height: 100vh;
-  background: linear-gradient(45deg, #ddad8b, transparent);
+  background-image: url('./assets/16583516-fond-vert-pastel-avec-des-traits-de-peinture-sur-toile-vectoriel.jpg');
 }
 .error-message {
   color: #bb2624;  
@@ -29,7 +29,7 @@ body {
 h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #e2ae8b;
+  color: #8fc775;
   position: relative;
 
 }
@@ -39,7 +39,7 @@ h2 {
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(198, 125, 69, 0.709);
+  box-shadow: 0 10px 60px rgba(68, 90, 25, 0.709);
 }
 
 .form-group {
@@ -49,7 +49,7 @@ h2 {
 label {
   display: block;
   font-weight: bold;
-  color: #333;
+  color: #838383;
 }
 
 .form-control {
@@ -63,7 +63,7 @@ label {
 }
 
 .btn-primary {
-  background-color: #e2ae8b;
+  background-color: #8fc775;
   color: #fff;
   padding: 12px 20px;
   font-size: 16px;
@@ -74,7 +74,20 @@ label {
 }
 
 .btn-primary:hover {
-  background-color: #d39066;
+  background-color: #82a473;
 }
 
-  
+ .mandatoryLabel {
+  color: #bb2624;
+  margin-left: 2px;;
+ } 
+
+ input[type="date"] {
+  color: #6F7787;   
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: url('./assets/icone-du-calendrier-des-evenements-vert.png') no-repeat center; 
+  background-size: 20px;
+
+}

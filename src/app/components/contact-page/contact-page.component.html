@@ -1,26 +1,26 @@
+<body>
+  <div class="inner">
+    <form action>
 
-<div class="container">
-    <h2>Contact Page</h2>
-    <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
-      <!-- Adresse Email -->
-      <div class="form-group">
-        <label for="contactEmail">Email:</label>
-        <input type="email" class="form-control" id="contactEmail" name="contactEmail" required [(ngModel)]="contact.email">
-      </div>
-  
-      <!-- Sujet -->
-      <div class="form-group">
-        <label for="subject">Subject:</label>
-        <input type="text" class="form-control" id="subject" name="subject" required [(ngModel)]="contact.subject">
-      </div>
-  
-      <!-- Description -->
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea class="form-control" id="description" name="description" rows="4" required [(ngModel)]="contact.description"></textarea>
-      </div>
-  
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <h3>Contact Us</h3>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+      <label class="form-group">
+        <input type="text" class="form-control" required [(ngModel)]="contact.name" name="name">
+        <span>Your Name</span>
+      </label>
+
+      <label class="form-group">
+        <input type="email" class="form-control" required [(ngModel)]="contact.email" name="email">
+        <span>Your Mail</span>
+      </label>
+
+      <label class="form-group">
+        <input type="text" class="form-control" required [(ngModel)]="contact.message" name="message">
+        <span>Your Message</span>
+      </label>
+
+      <button type="submit" class="submit-button">Submit</button>
     </form>
   </div>
-  
+</body>
