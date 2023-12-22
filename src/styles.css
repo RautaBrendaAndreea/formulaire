@@ -17,7 +17,7 @@ body {
 .container {
   width: 800px;
   margin: 0 auto;
-  transform: translateY(15%);
+  transform: translateY(3%);
 }
 
 .wrapper {
@@ -58,7 +58,6 @@ label {
   font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 5px;
-  background-color: #f9f9f9;
   color: #333;
 }
 
@@ -87,7 +86,7 @@ label {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-  background: url('./assets/icone-du-calendrier-des-evenements-vert.png') no-repeat center; 
+  background: url('./assets/calendar.png') no-repeat center; 
   background-size: 20px;
 
 }

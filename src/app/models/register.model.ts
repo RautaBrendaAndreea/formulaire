@@ -13,7 +13,7 @@ export interface CreateYourAccount {
     sexe:string;
     dateOfBirth: string;
     country: string;
-    address: string;
+    adress: string;
     postalCode: string;
     phoneNumber: string;
 }

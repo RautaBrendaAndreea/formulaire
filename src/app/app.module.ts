@@ -12,15 +12,14 @@ import { CreateYourAccountComponent } from './components/create-your-account/cre
 import { ContactPageComponent } from './components/contact-page/contact-page.component';
 import { CreateYourAccount2Component } from './components/create-your-account2/create-your-account2.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ParentComponent } from './components/parent/parent.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateYourAccountComponent,
     ContactPageComponent,
-    CreateYourAccount2Component,
-    ParentComponent
+    CreateYourAccount2Component
   ],
   imports: [
     BrowserModule,

@@ -1,30 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { CreateYourAccount } from '../../models/register.model';
+import { ValidatorService } from 'src/app/services/validator-service.service';
+import { Router } from '@angular/router';
 
 
-
-export function emailMatcher(control: AbstractControl) {
-  const email = control.get('email')?.value;
-  const confirmationEmail = control.get('confirmationEmail')?.value;
-
-  if (email === confirmationEmail) {
-    return null;
-  }
-
-  return { emailMismatch: true };
-}
-
-export function passwordMatcher(control: AbstractControl) {
-  const password = control.get('password')?.value;
-  const confirmationPassword = control.get('confirmationPassword')?.value;
-
-  if (password === confirmationPassword) {
-    return null;
-  }
-
-  return { passwordMismatch: true };
-}
 
 @Component({
   selector: 'app-create-your-account',
@@ -34,7 +14,6 @@ export function passwordMatcher(control: AbstractControl) {
 export class CreateYourAccountComponent {
   accountForm: FormGroup;
   showPassword: boolean = false;
-  @Output() nextStep: EventEmitter<CreateYourAccount> = new EventEmitter<CreateYourAccount>();
   account: CreateYourAccount = {
     firstName: '',
     lastName: '',
@@ -44,32 +23,47 @@ export class CreateYourAccountComponent {
     confirmPassword: ''
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, 
+    private validatorService: ValidatorService,
+    private router: Router) {
     this.accountForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z\s]+$/)]],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]],
       confirmEmail: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/)]],
       confirmPassword: ['', Validators.required]
+    }, {
+      validators: [
+        this.validatorService.emailMatcher.bind(this.validatorService),
+        this.validatorService.passwordMatcher.bind(this.validatorService)
+      ]
     });
   }
 
-  onSubmit() {
-    if (this.isFormValid()) {
-      this.nextStep.emit(this.account);
+  onSubmit(): void {
+    console.log('Form validity:', this.accountForm.valid);
+  
+    if (this.accountForm.valid) {
+      this.router.navigate(['/create-your-account2']);
+    } else {
+      console.log("Le formulaire n'est pas valide");
+      Object.keys(this.accountForm.controls).forEach(key => {
+        const control = this.accountForm.get(key);
+        console.log(`Control '${key}':`);
+        console.log('  Value:', control?.value);
+        console.log('  Valid:', control?.valid);
+        console.log('  Errors:', control?.errors);
+      });
     }
   }
-
-  isFormValid(): boolean {
-    return (
-      this.accountForm.valid &&
-      this.account.email === this.account.confirmEmail &&
-      this.account.password === this.account.confirmPassword
-    );
+  
+  
+  getRequiredErrorMessage(field: AbstractControl): string {
+    return field.hasError('required') && (field.touched || field.dirty) ? 'This field is required' : '';
   }
 
-  toggleShowPassword() {
+  togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 }

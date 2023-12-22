@@ -1,16 +1,11 @@
-
 <div class="container row">
- 
-
-
   <form
     (ngSubmit)="onSubmit()"
     [formGroup]="accountForm"
     novalidate
     class="formGroup center"
   >
-
-  <h2>{{ 'Create Your Account' | uppercase }}</h2>
+    <h2>{{ "Create Your Account" | uppercase }}</h2>
 
     <!-- Nom et Prénom -->
     <div
@@ -21,7 +16,9 @@
           accountForm.get('firstName')?.hasError('required')
       }"
     >
-      <label for="firstName ">First Name <span class="mandatoryLabel">*</span></label>
+      <label for="firstName "
+        >First Name <span class="mandatoryLabel">*</span></label
+      >
       <input
         type="text"
         class="form-control"
@@ -35,7 +32,18 @@
         "
         class="error-message"
       >
-      This field is required
+        {{ getRequiredErrorMessage(accountForm.get("firstName")!) }}
+      </div>
+      <div
+        class="error-message"
+        role="alert"
+        *ngIf="
+          accountForm.get('firstName')?.hasError('pattern') &&
+          (accountForm.get('firstName')?.touched ||
+            accountForm.get('firstName')?.dirty)
+        "
+      >
+        Can't contain digits
       </div>
     </div>
 
@@ -47,7 +55,9 @@
           accountForm.get('lastName')?.hasError('required')
       }"
     >
-      <label for="lastName">Last Name<span class="mandatoryLabel">*</span></label>
+      <label for="lastName"
+        >Last Name<span class="mandatoryLabel">*</span></label
+      >
       <input
         type="text"
         class="form-control"
@@ -61,7 +71,18 @@
         "
         class="error-message"
       >
-      This field is required
+        {{ getRequiredErrorMessage(accountForm.get("lastName")!) }}
+      </div>
+      <div
+        class="error-message"
+        role="alert"
+        *ngIf="
+          accountForm.get('lastName')?.hasError('pattern') &&
+          (accountForm.get('lastName')?.touched ||
+            accountForm.get('lastName')?.dirty)
+        "
+      >
+        Can't contain digits
       </div>
     </div>
 
@@ -88,7 +109,17 @@
         "
         class="error-message"
       >
-      This field is required
+        {{ getRequiredErrorMessage(accountForm.get("email")!) }}
+      </div>
+      <div
+        class="error-message"
+        role="alert"
+        *ngIf="
+          accountForm.get('email')?.hasError('pattern') &&
+          (accountForm.get('email')?.touched || accountForm.get('email')?.dirty)
+        "
+      >
+        Must be a valid email address (exemple@gmail.com)
       </div>
     </div>
 
@@ -100,7 +131,9 @@
           accountForm.get('confirmEmail')?.hasError('required')
       }"
     >
-      <label for="confirmEmail">Confirmation Email<span class="mandatoryLabel">*</span></label>
+      <label for="confirmEmail"
+        >Confirmation Email<span class="mandatoryLabel">*</span></label
+      >
       <input
         type="email"
         class="form-control"
@@ -114,36 +147,48 @@
         "
         class="error-message"
       >
-      This field is required
+        {{ getRequiredErrorMessage(accountForm.get("confirmEmail")!) }}
       </div>
     </div>
 
     <!-- Mot de passe et Confirmation Mot de passe -->
     <div
-      class="form-group"
+      class="form-group position-relative"
       [ngClass]="{
         'has-error':
           accountForm.get('password')?.touched &&
           accountForm.get('password')?.hasError('required')
       }"
     >
-      <label for="password">Password<span class="mandatoryLabel">*</span></label>
-      <input
-        type="{{ showPassword ? 'text' : 'password' }}"
-        class="form-control"
-        id="password"
-        formControlName="password"
-      />
-      <div class="input-group-append">
-        <div class="input-group-text">
-          <input
-            type="checkbox"
-            class="showPasswordCheckbox"
-            id="showPasswordCheckbox"
-            (change)="toggleShowPassword()"
-          />
-          <label for="showPasswordCheckbox">Show Password</label>
-        </div>
+      <label for="password"
+        >Password<span class="mandatoryLabel">*</span></label
+      >
+      <div class="input-group">
+        <input
+          type="{{ showPassword ? 'text' : 'password' }}"
+          class="form-control"
+          id="password"
+          formControlName="password"
+        />
+        <span
+          class="input-group-text icon icon-show-password position-absolute top-50 end-0 translate-middle-y"
+          [ngStyle]="{
+            'background-image': showPassword
+              ? 'url(/assets/oeilOuvert.png)'
+              : 'url(/assets/oeilFermer.png)'
+          }"
+          (click)="accountForm.get('password') && togglePasswordVisibility()"
+        ></span>
+      </div>
+      <div
+        *ngIf="
+          accountForm.get('password')?.hasError('pattern') &&
+          (accountForm.get('password')?.touched ||
+            accountForm.get('password')?.dirty)
+        "
+        class="error-message"
+      >
+        {{ getRequiredErrorMessage(accountForm.get("password")!) }}
       </div>
       <div
         *ngIf="
@@ -152,41 +197,52 @@
         "
         class="error-message"
       >
-      This field is required
+        The password must contain at least 8 characters including one digit, an
+        uppercase letter and a special character
       </div>
     </div>
 
     <div
-      class="form-group"
+      class="form-group position-relative"
       [ngClass]="{
         'has-error':
           accountForm.get('confirmPassword')?.touched &&
           accountForm.get('confirmPassword')?.hasError('required')
       }"
     >
-
-
-      <label for="confirmPassword">Confirmation Password<span class="mandatoryLabel">*</span></label>
+      <label for="confirmPassword"
+        >Confirmation Password<span class="mandatoryLabel">*</span></label
+      >
       <input
-        type="password"
+        type="{{ showPassword ? 'text' : 'password' }}"
         class="form-control"
         id="confirmPassword"
         formControlName="confirmPassword"
       />
-      <div
-        *ngIf="
-          accountForm.get('confirmPassword')?.touched &&
-          accountForm.get('confirmPassword')?.hasError('required')
+      <span
+        class="input-group-text icon icon-show-password confirmPassword position-absolute top-50 end-0 translate-middle-y"
+        [ngStyle]="{
+          'background-image': showPassword
+            ? 'url(/assets/oeilOuvert.png)'
+            : 'url(/assets/oeilFermer.png)'
+        }"
+        (click)="
+          accountForm.get('confirmPassword') && togglePasswordVisibility()
         "
+      ></span>
+      <div
         class="error-message"
+        role="alert"
+        *ngIf="
+          accountForm.hasError('passwordMismatch') &&
+          accountForm.get('confirmationPassword')?.touched
+        "
       >
-      This field is required
+        The confirmation password does not match the original password
       </div>
     </div>
 
     <!-- Bouton Next -->
-    <button type="submit" class="btn btn-primary mt-2" [disabled]="!isFormValid()">
-      Next
-    </button>
+    <button type="submit" class="btn btn-primary mt-2">Next</button>
   </form>
 </div>
